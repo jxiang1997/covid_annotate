@@ -19,13 +19,13 @@ NUM_CHANNELS = 5
 
 METADATA_DIR = '/data/rsg/mammogram/CellPainter'
 metadata_file = "images_for_puma_and_morpho_assay_metadata_aug18_2020.json"
-full_dataset_dir = '/Users/jxiang/Desktop'
+full_dataset_dir = '/data/rsg/mammogram/covid_data'
 
-positive_back_dir = '/Users/jxiang/Desktop/positive_back'
-negative_back_dir = '/Users/jxiang/Desktop/negative_back'
+positive_back_dir = '/data/rsg/mammogram/covid_data/positive_back'
+negative_back_dir = '/data/rsg/mammogram/covid_data/negative_back'
 
-positive_metadata = json.load(open("/Users/jxiang/Desktop/positive_back.json"))
-negative_metadata = json.load(open("/Users/jxiang/Desktop/negative_back.json"))
+positive_metadata = json.load(open("/data/rsg/mammogram/covid_data/positive_back.json"))
+negative_metadata = json.load(open("/data/rsg/mammogram/covid_data/negative_back.json"))
 
 # metadata = json.load(open(os.path.join(METADATA_DIR, metadata_file)))
 
