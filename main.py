@@ -17,8 +17,8 @@ NUM_CLASSES = 2
 NUM_IMAGES = 5
 NUM_CHANNELS = 5
 
-METADATA_DIR = '/data/rsg/mammogram/CellPainter'
-metadata_file = "images_for_puma_and_morpho_assay_metadata_aug18_2020.json"
+NUM_REFERENCES = 5
+
 full_dataset_dir = '/data/rsg/mammogram/covid_data'
 
 positive_back_dir = '/data/rsg/mammogram/covid_data/positive_back'
@@ -26,6 +26,15 @@ negative_back_dir = '/data/rsg/mammogram/covid_data/negative_back'
 
 positive_metadata = json.load(open("/data/rsg/mammogram/covid_data/positive_back.json"))
 negative_metadata = json.load(open("/data/rsg/mammogram/covid_data/negative_back.json"))
+
+positive_reference = np.random.choice([i for i in positive_metadata.keys()], size=NUM_REFERENCES, replace=False)
+for path in positive_reference:
+    del positive_metadata[path]
+
+negative_reference = np.random.choice([i for i in negative_metadata.keys()], size=NUM_REFERENCES, replace=False)
+for path in negative_reference:
+    del negative_metadata[path]
+
 
 # metadata = json.load(open(os.path.join(METADATA_DIR, metadata_file)))
 
@@ -56,21 +65,21 @@ def get_random_negative_image_paths(k=3):
 def main():
     mols = []
 
-    pos_image_paths = get_random_positive_image_paths(NUM_IMAGES + 1)
-    neg_image_paths = get_random_negative_image_paths(NUM_IMAGES + 1)
+    pos_test_image = get_random_positive_image_paths(1)
+    neg_test_image = get_random_negative_image_paths(1)
 
     for i in range(NUM_CLASSES):
         if i == 0:
             mols.append({
-                'image_paths': pos_image_paths[:-1],
+                'image_paths': positive_reference,
                 'label': "positive",
-                'test_image': pos_image_paths[-1]
+                'test_image': pos_test_image[0]
             })
         else:
             mols.append({
-                'image_paths': neg_image_paths[:-1],
+                'image_paths': negative_reference,
                 'label': "negative",
-                'test_image': neg_image_paths[-1]
+                'test_image': neg_test_image[0]
             })
 
     test_index = random.choices(range(NUM_CLASSES))[0]
