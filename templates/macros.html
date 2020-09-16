@@ -1,0 +1,13 @@
+{% macro show_images(image_paths, max_dim, show_name=True) %}
+    <div class="row"></div>
+      <div class="col-11">
+        <div class="row img-row">
+          {% for image_path in image_paths %}
+          <div class="img-container">
+            <a href="#" class="thumbnail img-fluid"><img data-toggle="modal" data-target="#imgModal" class="thumb" src="{{ url_for('image', path=image_path) }}" /></a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+{% endmacro %}
