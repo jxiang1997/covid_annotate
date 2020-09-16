@@ -77,8 +77,6 @@ def main():
 
     last = request.args.get('last', 'NA')
 
-    print("MOLS: ", mols)
-
     return render_template("main.html", mols=mols, test_index=test_index, num_channels=NUM_CHANNELS, last=last)
 
 @app.route('/image/<path:path>')
