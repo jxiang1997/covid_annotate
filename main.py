@@ -47,7 +47,7 @@ for path in negative_reference:
 
 # metadata = json.load(open(os.path.join(METADATA_DIR, metadata_file)))
 
-def get_random_positive_image_paths(k=3):
+def get_random_positive_image_paths(k=3, index):
     image_paths = [i for i in positive_metadata.keys()]
     chosen_paths = np.random.choice(image_paths, size = min(k, len(image_paths)), replace=False)
 
@@ -73,6 +73,8 @@ def get_random_negative_image_paths(k=3):
 @app.route('/')
 def main():
     mols = []
+
+    global index
 
     pos_test_image = shuffled_negative_metadata_list[index]
     neg_test_image = shuffled_negative_metadata_list[index]
