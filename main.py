@@ -76,7 +76,9 @@ def main():
 
     global index
 
-    pos_test_image = shuffled_negative_metadata_list[index]
+    print(index)
+
+    pos_test_image = shuffled_positive_metadata_list[index]
     neg_test_image = shuffled_negative_metadata_list[index]
 
     for i in range(NUM_CLASSES):
