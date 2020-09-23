@@ -28,10 +28,12 @@ positive_metadata = json.load(open("/data/rsg/mammogram/covid_data/positive_back
 negative_metadata = json.load(open("/data/rsg/mammogram/covid_data/negative_back.json"))
 
 shuffled_positive_metadata_list = list(positive_metadata.keys())
-random.shuffle(shuffled_positive_metadata_list)
 
 shuffled_negative_metadata_list = list(negative_metadata.keys())
-random.shuffle(shuffled_negative_metadata_list)
+
+shuffled_metadata_list = shuffled_positive_metadata_list + shuffled_negative_metadata_list
+
+random.shuffle(random_metadata_list)
 
 index = 0
 
@@ -78,24 +80,33 @@ def main():
 
     print(index)
 
-    pos_test_image = shuffled_positive_metadata_list[index]
-    neg_test_image = shuffled_negative_metadata_list[index]
+    test_image = shuffled_metadata_list[index]
 
-    for i in range(NUM_CLASSES):
-        if i == 0:
-            mols.append({
-                'image_paths': positive_reference,
-                'label': "positive",
-                'test_image': pos_test_image
-            })
-        else:
-            mols.append({
-                'image_paths': negative_reference,
-                'label': "negative",
-                'test_image': neg_test_image
-            })
-
-    test_index = random.choices(range(NUM_CLASSES))[0]
+    label = 'positive' if test_image in positive_metadata else 'negative'
+    if label == 'positive':
+        mols.append({
+            'image_paths': positive_reference,
+            'label': "positive",
+            'test_image': test_image
+        })
+        mols.append({
+            'image_paths': negative_reference,
+            'label': "positive",
+            'test_image': negative_reference[0]
+        })
+        test_index = 0
+    else:
+        mols.append({
+            'image_paths': positive_reference,
+            'label': "positive",
+            'test_image': positive_reference[0]
+        })
+        mols.append({
+            'image_paths': negative_reference,
+            'label': "negative",
+            'test_image': test_image
+        })
+        test_index = 1
 
     last = request.args.get('last', 'NA')
 
