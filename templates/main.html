@@ -18,8 +18,8 @@
         <div class="btn-container text-center float-right">
           <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#instructionsModal">Instructions</button>
         {% for mol_dict in mols %}
-        {{mols[test_index]['test_image']}}
           {% set correct = mols[test_index]['test_image'] == mol_dict['test_image'] %}
+          {{mol_dict['test_image']}}
           <button type="button" class="btn btn-secondary  checkAnswerBtn" data-smile="{{ mol_dict['smile']}}" data-correct="{{ correct }}" id="answerBtn-{{ mol_dict['shortname']}}">
             {{mol_dict['label']}}
           </button>
@@ -28,6 +28,7 @@
       </div>
       <div class="card-body">
       {% set image_basenames = [mols[test_index]['test_image']] %}
+      {{ image_basenames}}
       {{ show_images(image_basenames, v, False) }}
       </div>
     </div>
