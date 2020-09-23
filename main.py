@@ -27,8 +27,11 @@ negative_back_dir = '/data/rsg/mammogram/covid_data/negative_back'
 positive_metadata = json.load(open("/data/rsg/mammogram/covid_data/positive_back.json"))
 negative_metadata = json.load(open("/data/rsg/mammogram/covid_data/negative_back.json"))
 
-shuffled_positive_metadata_list = random.shuffle(list(positive_metadata.keys()))
-shuffled_negative_metadata_list = random.shuffle(list(negative_metadata.keys()))
+shuffled_positive_metadata_list = list(positive_metadata.keys())
+random.shuffle(shuffled_positive_metadata_list)
+
+shuffled_negative_metadata_list = list(negative_metadata.keys())
+random.shuffle(shuffled_negative_metadata_list)
 
 index = 0
 
