@@ -78,8 +78,6 @@ def main():
 
     global index
 
-    print(index)
-
     test_image = shuffled_metadata_list[index]
 
     label = 'positive' if test_image in positive_metadata else 'negative'
