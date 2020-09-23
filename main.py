@@ -27,6 +27,12 @@ negative_back_dir = '/data/rsg/mammogram/covid_data/negative_back'
 positive_metadata = json.load(open("/data/rsg/mammogram/covid_data/positive_back.json"))
 negative_metadata = json.load(open("/data/rsg/mammogram/covid_data/negative_back.json"))
 
+shuffled_positive_metadata_list = random.shuffle(list(positive_metadata.keys()))
+shuffled_negative_metadata_list = random.shuffle(list(negative_metadata.keys()))
+
+index = 0
+
+
 positive_reference = np.random.choice([i for i in positive_metadata.keys()], size=NUM_REFERENCES, replace=False)
 for path in positive_reference:
     del positive_metadata[path]
@@ -65,21 +71,21 @@ def get_random_negative_image_paths(k=3):
 def main():
     mols = []
 
-    pos_test_image = get_random_positive_image_paths(1)
-    neg_test_image = get_random_negative_image_paths(1)
+    pos_test_image = shuffled_negative_metadata_list[index]
+    neg_test_image = shuffled_negative_metadata_list[index]
 
     for i in range(NUM_CLASSES):
         if i == 0:
             mols.append({
                 'image_paths': positive_reference,
                 'label': "positive",
-                'test_image': pos_test_image[0]
+                'test_image': pos_test_image
             })
         else:
             mols.append({
                 'image_paths': negative_reference,
                 'label': "negative",
-                'test_image': neg_test_image[0]
+                'test_image': neg_test_image
             })
 
     test_index = random.choices(range(NUM_CLASSES))[0]
