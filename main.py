@@ -89,7 +89,7 @@ def main():
         })
         mols.append({
             'image_paths': negative_reference,
-            'label': "positive",
+            'label': "negative",
             'test_image': negative_reference[0]
         })
         test_index = 0
