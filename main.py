@@ -33,7 +33,7 @@ shuffled_negative_metadata_list = list(negative_metadata.keys())
 
 shuffled_metadata_list = shuffled_positive_metadata_list + shuffled_negative_metadata_list
 
-random.shuffle(random_metadata_list)
+random.shuffle(shuffled_metadata_list)
 
 index = 0
 
